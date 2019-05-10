@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "1a79f063-9f8e-4721-bbb0-2c022f977dfb",
+		"name": "BookStore-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Book] getBookByParameters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/books?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"books"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Book] PostBook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Insert Postman\",\n    \"author\": \".EXE\",\n    \"price\": 15.5 \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Book] UpdatePutBook",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Teste PUT\",\n    \"author\": \".EXE\",\n    \"price\": 15.5 \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/books/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Book] DeleteBookById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/books/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Basket] getAllBaskets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/baskets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"baskets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Basket] PostNewBook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer\": {\n        \"id\": 1,\n        \"name\": \"Samuel\",\n        \"email\": \"email@email\",\n        \"cpfOuCnpj\": \"5555555555\"\n    },\n    \"books\": [\n        {\n            \"id\": 2,\n            \"title\": \"Loja\",\n            \"author\": \"BackEnd Revista\",\n            \"price\": 10,\n            \"commentaries\": []\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/baskets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"baskets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Basket] getBasketById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/baskets/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"baskets",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Basket] updateBasket",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer\": {\n        \"id\": 1,\n        \"name\": \"Samuel\",\n        \"email\": \"email@email\",\n        \"cpfOuCnpj\": \"5555555555\"\n    },\n    \"books\": [\n    \t\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/baskets/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"baskets",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Basket] insertBookInBasket",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"title\": \"PUC\",\n    \"author\": \"Microsserviços book\",\n    \"price\": 25,\n    \"commentaries\": [\n        {\n            \"id\": 1,\n            \"review\": \"My first review\"\n        },\n        {\n            \"id\": 2,\n            \"review\": \"My second review\"\n        },\n        {\n            \"id\": 3,\n            \"review\": \"My third review\"\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/baskets/2/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"baskets",
+						"2",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Basket] CleanBasket",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/baskets/clean/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"baskets",
+						"clean",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Request] InsertRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "96aeb479-2cba-45fb-91cb-19a8942b045e",
+						"exec": [
+							"pm.test(\"Object created\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"customer\": {\n        \"id\": 1,\n        \"name\": \"Samuel\",\n        \"email\": \"email@email\",\n        \"cpfOuCnpj\": \"5555555555\"\n    },\n    \"books\": [\n        {\n            \"id\": 1,\n            \"title\": \"PUC\",\n            \"author\": \"Microsserviços book\",\n            \"price\": 25,\n            \"commentaries\": [\n                {\n                    \"id\": 1,\n                    \"review\": \"My first review\"\n                },\n                {\n                    \"id\": 2,\n                    \"review\": \"My second review\"\n                },\n                {\n                    \"id\": 3,\n                    \"review\": \"My third review\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Loja\",\n            \"author\": \"BackEnd Revista\",\n            \"price\": 10,\n            \"commentaries\": []\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/requests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"requests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Request] getRequests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc5b5378-ecbf-48ab-bb08-3774a31497ad",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/requests",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"requests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Payment] insertNewPayment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1a69296a-e883-4807-9e3a-f928944b146f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Credentials sucessfuly validated.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"creditCardDTO\": {\r\n    \"dateExpire\": \"2019-04-19\",\r\n    \"flag\": \"VISA\",\r\n    \"id\": 1,\r\n    \"number\": 56984785,\r\n    \"token\": 123\r\n  },\r\n  \"id\": 0,\r\n  \"requestId\": 1,\r\n  \"status\": \"NEW\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Payment] getPaymentById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/payments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"payments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Payment] updatePaymentStatus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97b5d8f3-5cce-46e6-9b84-e1303471457b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Payment still not validated.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"requestId\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/payments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"payments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

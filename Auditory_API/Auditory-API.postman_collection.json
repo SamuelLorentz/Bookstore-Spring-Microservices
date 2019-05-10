@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "0de5bf7f-3a44-483f-b204-62c8d8d0b86a",
+		"name": "Auditory-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auditory",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70d4f2f6-7abd-437f-858c-f42d837f5875",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Payment Confirmed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"requestId\":1,\n\t\"status\":\"PAYED\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/auditory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"auditory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auditory Failed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ecc1146a-1d6b-47b1-be96-2ce62481c1b6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Payment Not Confirmed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":1,\n\t\"requestId\":1,\n\t\"status\":\"NEW\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/auditory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"auditory"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

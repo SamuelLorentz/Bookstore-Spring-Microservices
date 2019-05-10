@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "284fae24-11a0-4718-bb18-42056720be29",
+		"name": "Credit-Transaction-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Credit/transaction Valid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34e00379-987b-4697-b7d7-bc3216ee8453",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Credentials sucessfuly validated.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dateExpire\": \"2019-04-19\",\n    \"flag\": \"VISA\",\n    \"id\": 1,\n    \"number\": 56984785,\n    \"token\": 123\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8095/v1/credit/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8095",
+					"path": [
+						"v1",
+						"credit",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Credit/transaction Failed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34e00379-987b-4697-b7d7-bc3216ee8453",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Credentials sucessfuly validated.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dateExpire\": \"2019-04-19\",\n    \"flag\": \"VISA\",\n    \"id\": 1,\n    \"number\": 56984785,\n    \"token\": 123\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8095/v1/credit/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8095",
+					"path": [
+						"v1",
+						"credit",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

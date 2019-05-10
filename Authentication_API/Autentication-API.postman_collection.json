@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "d409f0e5-3fae-48f1-a7c8-a7d43a9f789d",
+		"name": "Autentication-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer validated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8cce4fe5-b395-4fa7-8a9c-aa8118c1d9a4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Credentials sucessfuly validated.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer\": {\n        \"id\": 1,\n        \"name\": \"Samuel\",\n        \"email\": \"email@email.com\",\n        \"cpfOuCnpj\": \"123423545\"\n    },\n    \"password\": \"pwd123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8060/v1/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e62d7ec-8de1-4e9d-a3b7-b4d1459f8219",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Credentials failed to be validated.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer\": {\n        \"id\": 1,\n        \"name\": \"Samuel\",\n        \"email\": \"email@email.com\",\n        \"cpfOuCnpj\": \"123423545\"\n    },\n    \"password\": \"nopassword\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8060/v1/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
