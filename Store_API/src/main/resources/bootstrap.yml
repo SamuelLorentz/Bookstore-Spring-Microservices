@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: Bookstore
-  cloud:
-    config:
-      uri: http://localhost:8090

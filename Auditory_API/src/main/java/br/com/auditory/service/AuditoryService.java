@@ -8,7 +8,12 @@ import br.com.auditory.model.dto.PaymentDTO;
 @Service
 public class AuditoryService {
 
-	public AuditoryDTO AuthorizeDelivery(PaymentDTO paymentDTO) {
+	/**
+	 *  
+	 * @param paymentDTO
+	 * @return
+	 */
+	public AuditoryDTO confirmPayment(PaymentDTO paymentDTO) {
 			AuditoryDTO auditory;
 		if (paymentDTO.getStatus().equals("PAYED")) {
 			auditory = new AuditoryDTO(true, "Payment Confirmed");
