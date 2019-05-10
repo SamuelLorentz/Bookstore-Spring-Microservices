@@ -14,5 +14,6 @@
 		<module>Store_API</module>
 		<module>Credit_Transaction_API</module>
 		<module>Eureka-Discovery</module>
+		<module>configuration-server</module>
 	</modules>
 </project>
