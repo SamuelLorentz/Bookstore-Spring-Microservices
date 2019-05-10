@@ -64,5 +64,5 @@ public class CreditCardDTO implements Serializable {
 	public void setDateExpire(String dateExpire) {
 		this.dateExpire = dateExpire;
 	}
-	
+
 }

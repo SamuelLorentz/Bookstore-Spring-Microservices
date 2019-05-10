@@ -24,6 +24,11 @@ public class AuditoryApiApplication extends WebMvcConfigurationSupport {
 		SpringApplication.run(AuditoryApiApplication.class, args);
 	}
 
+	/**
+	 * Swagger Doc.
+	 * 
+	 * @return
+	 */
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()

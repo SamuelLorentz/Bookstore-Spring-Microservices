@@ -22,9 +22,7 @@ public class CreditCard {
 		
 	}
 	
-	public CreditCard(Integer id, String flag, Integer token, LocalDate dateExpire, Integer number) {
-		super();
-		this.id = id;
+	public CreditCard(String flag, Integer token, LocalDate dateExpire, Integer number) {
 		this.flag = flag;
 		this.token = token;
 		this.dateExpire = dateExpire;

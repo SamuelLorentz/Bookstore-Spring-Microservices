@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bookstore.model.Payment;
-import br.com.bookstore.model.dto.AuthenticationDTO;
 import br.com.bookstore.model.dto.PaymentDTO;
 import br.com.bookstore.service.PaymentService;
 
@@ -24,20 +22,20 @@ public class PaymentController {
 	private PaymentService paymentService;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Payment> getPaymentById(@PathVariable Integer id) {
-		Payment obj = paymentService.find(id);
+	public ResponseEntity<PaymentDTO> getPaymentById(@PathVariable Integer id) {
+		PaymentDTO obj = paymentService.findPayment(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<AuthenticationDTO> insert(@RequestBody PaymentDTO paymentDTO) throws Exception {
-		AuthenticationDTO authenticationDTO = paymentService.insertPayment(paymentDTO);
-		return ResponseEntity.ok().body(authenticationDTO);
+	public ResponseEntity<PaymentDTO> insert(@RequestBody PaymentDTO paymentDTO) throws Exception {
+		paymentDTO = paymentService.insertPayment(paymentDTO);
+		return ResponseEntity.ok().body(paymentDTO);
 	}
 
-	@PutMapping(value = "/{id}")
-	public Payment updatePayment(@PathVariable Integer id, @RequestBody PaymentDTO payment) throws Exception {
-		return paymentService.update(payment);
+	@PutMapping(value = "/status")
+	public PaymentDTO updatePaymentStatus(@PathVariable Integer id, @RequestBody PaymentDTO payment) throws Exception {
+		return paymentService.updatePaymentStatus(payment);
 	}
 	
 	@DeleteMapping(value = "/{id}")

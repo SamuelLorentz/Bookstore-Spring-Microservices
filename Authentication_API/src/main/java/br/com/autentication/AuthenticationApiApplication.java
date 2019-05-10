@@ -39,6 +39,12 @@ public class AuthenticationApiApplication extends WebMvcConfigurationSupport imp
 		customerRepository.saveAll(Arrays.asList(cus1));
 	}
 
+	
+	/**
+	 * Swagger Doc.
+	 * 
+	 * @return
+	 */
 	 @Bean
 	    public Docket productApi() {
 	        return new Docket(DocumentationType.SWAGGER_2)

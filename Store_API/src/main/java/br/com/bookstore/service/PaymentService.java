@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +17,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.netflix.discovery.DiscoveryClient;
 
 import br.com.bookstore.model.Payment;
 import br.com.bookstore.model.Shopping;
@@ -32,47 +35,86 @@ public class PaymentService {
 
 	private final PaymentRepository paymentRepository;
 	private final ShoppingService shoppingService;
+	private final DiscoveryClient discoveryClient;
+	private final RestTemplate restTemplate;
 
 	@Autowired
-	public PaymentService(PaymentRepository paymentRepository, ShoppingService shoppingService) {
+	public PaymentService(PaymentRepository paymentRepository, ShoppingService shoppingService,
+			DiscoveryClient discoveryClient, RestTemplate restTemplate) {
 		this.paymentRepository = paymentRepository;
+		this.discoveryClient = discoveryClient;
 		this.shoppingService = shoppingService;
+		this.restTemplate = restTemplate;
 	}
 
-	public Payment find(Integer id) {
+	/**
+	 * Find Payment By ID.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public PaymentDTO findPayment(Integer id) {
 		Optional<Payment> obj = paymentRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Object not found! Id: " + id + ", Kind: " + Payment.class.getName()));
+		return convertToDTO(fromOptional(id, obj));
 	}
 
-	public AuthenticationDTO insertPayment(PaymentDTO paymentDTO) throws Exception {
+	/**
+	 * Insert new Payment
+	 * 
+	 * @param paymentDTO
+	 * @return
+	 * @throws Exception
+	 */
+	public PaymentDTO insertPayment(PaymentDTO paymentDTO) throws Exception {
 		Shopping shopping = shoppingService.find(paymentDTO.getRequestId());
-		CustomerDTO customerDTO = new CustomerDTO(shopping.getCustomer(), "pwd123");
-		AuthenticationDTO authenticationDTO = authenticateCustomer(customerDTO);
-		if (authenticationDTO.getValidation()) {
-			Payment payment = new Payment(null, paymentDTO.getStatus(), shopping);
-			authenticationDTO = authenticateCreditCard(paymentDTO.getCreditCardDTO());
-			if (authenticationDTO.getValidation()) {
-				paymentRepository.save(payment);
-			}
-		}
-		return authenticationDTO;
-	}
 
-	public Payment update(PaymentDTO obj) throws Exception {
-		Payment newObj = find(obj.getId());
-		obj.setStatus(newObj.getStatus());
-		AuditoryDTO auditoryDTO = authenticatePayment(obj);
-		if (auditoryDTO.getValidation()) {
-			newObj.setStatus("Waiting for delivery.");
+		if (validatedPayment(shopping, paymentDTO)) {
+			return new PaymentDTO(paymentRepository.save(new Payment("PAYED", shopping)));
 		} else {
-			newObj.setStatus("Payment still not validated.");
+			return new PaymentDTO(paymentRepository.save(new Payment("NOT PAYED", shopping)));
 		}
-		return paymentRepository.save(newObj);
+
 	}
 
+	private boolean validatedPayment(Shopping shopping, PaymentDTO paymentDTO) throws Exception {
+		CustomerDTO customerDTO = new CustomerDTO(shopping.getCustomer(), "pwd123");
+		ServiceInstance instance = discoveryClient.getInstancesById("")
+		AuthenticationDTO customer = 
+				
+				authenticateCustomer(customerDTO);
+		AuthenticationDTO creditCard = authenticateCreditCard(paymentDTO.getCreditCardDTO());
+		return (customer.getValidation() && creditCard.getValidation());
+	}
+
+	/**
+	 * Update Payment status.
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	public PaymentDTO updatePaymentStatus(PaymentDTO updateObj) {
+		Optional<Payment> obj = paymentRepository.findById(updateObj.getId());
+		Payment payment = fromOptional(updateObj.getId(), obj);
+		payment.setStatus(updateObj.getStatus());
+		return new PaymentDTO(paymentRepository.save(payment));
+	}
+
+	/**
+	 * Delete Payment by ID.
+	 * 
+	 * @param id
+	 */
 	public void deletePaymentById(Integer id) {
 		paymentRepository.deleteById(id);
+	}
+
+	private PaymentDTO convertToDTO(Payment obj) {
+		return new PaymentDTO(obj);
+	}
+
+	private Payment fromOptional(Integer id, Optional<Payment> obj) {
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Object not found! Id: " + id + ", Kind: " + Payment.class.getName()));
 	}
 
 	public AuthenticationDTO authenticateCustomer(CustomerDTO customerDTO) throws Exception {

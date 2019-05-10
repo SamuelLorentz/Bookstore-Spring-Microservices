@@ -15,24 +15,36 @@ import br.com.autentication.service.exception.ObjectNotFoundException;
 public class CustomerService {
 
 	@Autowired
-	private CustomerRepository CustomerRepository;
+	private CustomerRepository customerRepository;
 
-	private final static String Valid = "Credentials sucessfuly validated.";
-	private final static String Invalid = "Credentials failed to be validated.";
+	private static final String VALID = "Credentials sucessfuly validated.";
+	private static final String INVALID = "Credentials failed to be validated.";
 
+	/**
+	 * Authenticate Customer Credentials **Token**
+	 * 
+	 * @param customerDTO
+	 * @return
+	 */
 	public AuthenticationDTO validadeCustomerCredentials(CustomerDTO customerDTO) {
 		AuthenticationDTO authenticationDTO;
-		Customer customer = find(customerDTO.getCustomer().getId());
+		Customer customer = findCustomer(customerDTO.getCustomer().getId());
 		if (customerDTO.getPassword().equals(customer.getPassword())) {
-			authenticationDTO = new AuthenticationDTO(true, Valid);
+			authenticationDTO = new AuthenticationDTO(true, VALID);
 		} else {
-			authenticationDTO = new AuthenticationDTO(false, Invalid);
+			authenticationDTO = new AuthenticationDTO(false, INVALID);
 		}
 		return authenticationDTO;
 	}
 
-	public Customer find(Integer id) {
-		Optional<Customer> obj = CustomerRepository.findById(id);
+	/**
+	 * Return Customer by ID.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Customer findCustomer(Integer id) {
+		Optional<Customer> obj = customerRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Object not found! Id: " + id + ", Kind: " + Customer.class.getName()));
 	}

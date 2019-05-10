@@ -14,21 +14,20 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Payment {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JsonManagedReference
 	@OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "request_id")
+	@JoinColumn(name = "request_id")
 	private Shopping shopping;
 	private String status;
-	
+
 	public Payment() {
-		
+
 	}
 
-	public Payment(Integer id, String status, Shopping shopping) {
-		this.id = id;
+	public Payment(String status, Shopping shopping) {
 		this.status = status;
 		this.shopping = shopping;
 	}
@@ -41,14 +40,14 @@ public class Payment {
 		this.id = id;
 	}
 
-	public Shopping getRequest() {
+	public Shopping getShopping() {
 		return shopping;
 	}
 
-	public void setRequest(Shopping shopping) {
+	public void setShopping(Shopping shopping) {
 		this.shopping = shopping;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}

@@ -37,10 +37,15 @@ public class CreditTransactionApiApplication extends WebMvcConfigurationSupport 
 	@Override
 	public void run(String... args) throws Exception {
 		LocalDate localDate = LocalDate.now();
-		CreditCard cus1 = new CreditCard(null, "VISA", 123, localDate, 56984785);
+		CreditCard cus1 = new CreditCard("VISA", 123, localDate, 56984785);
 		creditCardRepository.saveAll(Arrays.asList(cus1));
 	}
 
+	/**
+	 * Swagger Doc.
+	 * 
+	 * @return
+	 */
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()

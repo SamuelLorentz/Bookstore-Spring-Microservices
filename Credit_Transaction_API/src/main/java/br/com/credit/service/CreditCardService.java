@@ -16,29 +16,36 @@ import br.com.credit.service.exception.ObjectNotFoundException;
 public class CreditCardService {
 
 	@Autowired
-	private CreditCardRepository CreditCardRepository;
+	private CreditCardRepository creditCardRepository;
 
-	private final static String Valid = "Credentials sucessfuly validated.";
-	private final static String Invalid = "Credentials failed to be validated.";
+	private static final String VALID = "Credentials sucessfuly validated.";
+	private static final String INVALID = "Credentials failed to be validated.";
 
 	public AuthenticationDTO validateCreditCardCredentials(CreditCardDTO creditCardDTO) {
-		AuthenticationDTO authenticationDTO;
+
 		LocalDate dateOfDTO = LocalDate.parse(creditCardDTO.getDateExpire());
-		CreditCard creditCard = find(creditCardDTO.getId());
-		if (creditCardDTO.getFlag().equals(creditCard.getFlag()) && creditCardDTO.getToken() == creditCard.getToken()
+		CreditCard creditCard = findCard(creditCardDTO.getId());
+
+		if (creditCardDTO.getFlag().equals(creditCard.getFlag())
+				&& creditCardDTO.getToken().equals(creditCard.getToken())
 				&& dateOfDTO.equals(creditCard.getLocalDateExpire())
 				&& creditCardDTO.getNumber().equals(creditCard.getNumber())) {
-			authenticationDTO = new AuthenticationDTO(true, Valid);
+			return new AuthenticationDTO(true, VALID);
 
 		} else {
-			authenticationDTO = new AuthenticationDTO(false, Invalid);
+			return new AuthenticationDTO(false, INVALID);
 		}
 
-		return authenticationDTO;
 	}
 
-	public CreditCard find(Integer id) {
-		Optional<CreditCard> obj = CreditCardRepository.findById(id);
+	/**
+	 * Find Credit Card By ID.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public CreditCard findCard(Integer id) {
+		Optional<CreditCard> obj = creditCardRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Object not found! Id: " + id + ", Kind: " + CreditCard.class.getName()));
 	}

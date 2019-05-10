@@ -19,7 +19,7 @@ public class PaymentDTO implements Serializable{
 	
 	public PaymentDTO(Payment obj) {
 		this.id = obj.getId();
-		this.requestId = obj.getRequest().getId();
+		this.requestId = obj.getShopping().getId();
 		this.status = obj.getStatus();
 	}
 

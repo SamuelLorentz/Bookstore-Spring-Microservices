@@ -9,7 +9,9 @@ import br.com.auditory.model.dto.PaymentDTO;
 public class AuditoryService {
 
 	/**
-	 *  
+	 * 
+	 * Verify if payment is confirmed
+	 * 
 	 * @param paymentDTO
 	 * @return
 	 */
